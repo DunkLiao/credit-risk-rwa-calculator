@@ -25,9 +25,9 @@ st.markdown("""
         font-family: 'Outfit', 'Noto Sans TC', sans-serif;
     }
     
-    /* 頂部標題漸層效果 */
+    /* 頂部標題漸層效果：使用臺灣銀行企業紅與金色的高級感漸層 */
     .title-gradient {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        background: linear-gradient(135deg, #9E1B32 0%, #B8974D 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 700;
@@ -35,31 +35,31 @@ st.markdown("""
         margin-bottom: 0.5rem;
     }
     .subtitle {
-        color: #666;
+        color: #57534E;
         font-size: 1.1rem;
         margin-bottom: 2rem;
     }
     
     /* 玻璃擬態卡片容器 */
     .premium-card {
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(226, 232, 240, 0.8);
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(230, 223, 211, 0.9);
         border-radius: 16px;
         padding: 24px;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        box-shadow: 0 10px 15px -3px rgba(158, 27, 50, 0.03), 0 4px 6px -2px rgba(0, 0, 0, 0.01);
         margin-bottom: 20px;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .premium-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        border-color: #2a5298;
+        box-shadow: 0 20px 25px -5px rgba(158, 27, 50, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        border-color: #9E1B32;
     }
     
     /* 核心指標展示 */
     .metric-title {
         font-size: 0.9rem;
-        color: #718096;
+        color: #7A706B;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         margin-bottom: 4px;
@@ -68,18 +68,18 @@ st.markdown("""
     .metric-value {
         font-size: 2.2rem;
         font-weight: 700;
-        color: #1a202c;
+        color: #1C1917;
         line-height: 1.2;
     }
     .metric-sub {
         font-size: 0.85rem;
-        color: #4a5568;
+        color: #57534E;
         margin-top: 6px;
     }
     
     /* 漸層標籤 */
     .badge-primary {
-        background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 100%);
+        background: linear-gradient(135deg, #9E1B32 0%, #700E22 100%);
         color: white;
         padding: 4px 10px;
         border-radius: 8px;
@@ -87,7 +87,7 @@ st.markdown("""
         font-weight: bold;
     }
     .badge-success {
-        background: linear-gradient(135deg, #48bb78 0%, #22543d 100%);
+        background: linear-gradient(135deg, #2A7B4C 0%, #1A4D2E 100%);
         color: white;
         padding: 4px 10px;
         border-radius: 8px;
@@ -98,13 +98,14 @@ st.markdown("""
     /* 分隔線 */
     .divider {
         height: 1px;
-        background: linear-gradient(to right, #2a5298, transparent);
+        background: linear-gradient(to right, #9E1B32, transparent);
         margin: 25px 0;
     }
     
     /* 調整 sidebar 樣式 */
-    .css-1d391tw {
-        background-color: #f7fafc;
+    .css-1d391tw, [data-testid="stSidebar"] {
+        background-color: #F7F5F0;
+        border-right: 1px solid #E6DFD3;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -286,8 +287,8 @@ def get_rating_label(category, rating_idx, rating_agency):
 # -----------------------------------------------------------------------------
 st.sidebar.markdown("""
 <div style="text-align: center; margin-bottom: 20px;">
-    <h2 style="color: #2a5298; font-weight: 700; margin-bottom: 5px;">⚙️ 設定面板</h2>
-    <p style="color: #718096; font-size: 0.85rem;">信用風險標準法設定</p>
+    <h2 style="color: #9E1B32; font-weight: 700; margin-bottom: 5px;">⚙️ 設定面板</h2>
+    <p style="color: #7A706B; font-size: 0.85rem;">信用風險標準法設定</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -541,18 +542,18 @@ with tabs[0]:
         effective_rw = (rwa / total_ead) if total_ead > 0 else 0.0
         
         # --- 渲染結果卡片 ---
-        html_card = f"""<div class="premium-card" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; border: none; padding: 24px; border-radius: 16px;">
-<div class="metric-title" style="color: #94a3b8; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">信用相當曝險額 (EAD)</div>
-<div class="metric-value" style="color: #38bdf8; font-size: 2.2rem; font-weight: 700; line-height: 1.2;">${total_ead:,.2f}</div>
-<div class="metric-sub" style="color: #cbd5e1; font-size: 0.85rem; margin-top: 6px;">表內: ${on_balance_ead:,.2f} | 表外折算: ${off_balance_ead:,.2f}</div>
-<div class="divider" style="height: 1px; background: linear-gradient(to right, #38bdf8, transparent); margin: 20px 0;"></div>
-<div class="metric-title" style="color: #94a3b8; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">實質/平均風險權重 (Effective RW)</div>
-<div class="metric-value" style="color: #f59e0b; font-size: 2.2rem; font-weight: 700; line-height: 1.2;">{effective_rw * 100:.2f}%</div>
-<div class="metric-sub" style="color: #cbd5e1; font-size: 0.85rem; margin-top: 6px;">原始基礎權重: {base_rw * 100:.1f}%</div>
-<div class="divider" style="height: 1px; background: linear-gradient(to right, #f59e0b, transparent); margin: 20px 0;"></div>
-<div class="metric-title" style="color: #94a3b8; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">風險加權資產 (RWA)</div>
-<div class="metric-value" style="color: #10b981; font-size: 2.2rem; font-weight: 700; line-height: 1.2;">${rwa:,.2f}</div>
-<div class="metric-sub" style="color: #cbd5e1; font-size: 0.85rem; margin-top: 6px;">最低計提資本要求 (8%): <span style="color: #34d399; font-weight: 600;">${capital_requirement:,.2f}</span></div>
+        html_card = f"""<div class="premium-card" style="background: linear-gradient(135deg, #700E22 0%, #400511 100%); color: white; border: 1px solid #B8974D; padding: 24px; border-radius: 16px;">
+<div class="metric-title" style="color: #E6DFD3; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">信用相當曝險額 (EAD)</div>
+<div class="metric-value" style="color: #F5E2B3; font-size: 2.2rem; font-weight: 700; line-height: 1.2;">${total_ead:,.2f}</div>
+<div class="metric-sub" style="color: #E6DFD3; font-size: 0.85rem; margin-top: 6px;">表內: ${on_balance_ead:,.2f} | 表外折算: ${off_balance_ead:,.2f}</div>
+<div class="divider" style="height: 1px; background: linear-gradient(to right, #F5E2B3, transparent); margin: 20px 0;"></div>
+<div class="metric-title" style="color: #E6DFD3; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">實質/平均風險權重 (Effective RW)</div>
+<div class="metric-value" style="color: #F3B05C; font-size: 2.2rem; font-weight: 700; line-height: 1.2;">{effective_rw * 100:.2f}%</div>
+<div class="metric-sub" style="color: #E6DFD3; font-size: 0.85rem; margin-top: 6px;">原始基礎權重: {base_rw * 100:.1f}%</div>
+<div class="divider" style="height: 1px; background: linear-gradient(to right, #F3B05C, transparent); margin: 20px 0;"></div>
+<div class="metric-title" style="color: #E6DFD3; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">風險加權資產 (RWA)</div>
+<div class="metric-value" style="color: #A7F3D0; font-size: 2.2rem; font-weight: 700; line-height: 1.2;">${rwa:,.2f}</div>
+<div class="metric-sub" style="color: #E6DFD3; font-size: 0.85rem; margin-top: 6px;">最低計提資本要求 (8%): <span style="color: #34d399; font-weight: 600;">${capital_requirement:,.2f}</span></div>
 </div>"""
         st.markdown(html_card, unsafe_allow_html=True)
         
@@ -589,7 +590,7 @@ with tabs[0]:
                 x=scenario_labels,
                 y=scenario_rwas,
                 name="RWA (元)",
-                marker_color=['#3b82f6' if lbl != rating_selected else '#ef4444' for lbl in scenario_labels]
+                marker_color=['#B8974D' if lbl != rating_selected else '#9E1B32' for lbl in scenario_labels]
             ))
             fig.update_layout(
                 title=f"評等變動對 RWA 影響分析 (紅色為當前選擇)",
@@ -614,14 +615,14 @@ with tabs[0]:
             fig.add_trace(go.Scatter(
                 x=ltvs, y=rws, 
                 mode='lines+markers', 
-                line=dict(color='#2563eb', width=3),
-                marker=dict(size=8, color='#1d4ed8')
+                line=dict(color='#9E1B32', width=3),
+                marker=dict(size=8, color='#700E22')
             ))
             # 標出目前位置
             fig.add_trace(go.Scatter(
                 x=[ltv], y=[effective_rw * 100],
                 mode='markers',
-                marker=dict(size=12, color='#ef4444'),
+                marker=dict(size=12, color='#B8974D'),
                 name="當前 LTV"
             ))
             fig.update_layout(
@@ -760,22 +761,22 @@ with tabs[1]:
     with m1:
         st.markdown(f"""<div class="premium-card">
 <div class="metric-title">組合總曝險 (EAD)</div>
-<div class="metric-value">${total_portfolio_ead:,.2f}</div>
+<div class="metric-value" style="color: #1C1917;">${total_portfolio_ead:,.2f}</div>
 </div>""", unsafe_allow_html=True)
     with m2:
         st.markdown(f"""<div class="premium-card">
 <div class="metric-title">組合總風險資產 (RWA)</div>
-<div class="metric-value" style="color: #2b6cb0;">${total_portfolio_rwa:,.2f}</div>
+<div class="metric-value" style="color: #9E1B32;">${total_portfolio_rwa:,.2f}</div>
 </div>""", unsafe_allow_html=True)
     with m3:
         st.markdown(f"""<div class="premium-card">
 <div class="metric-title">整體加權風險權重</div>
-<div class="metric-value" style="color: #d69e2e;">{weighted_rw * 100:.2f}%</div>
+<div class="metric-value" style="color: #B8974D;">{weighted_rw * 100:.2f}%</div>
 </div>""", unsafe_allow_html=True)
     with m4:
         st.markdown(f"""<div class="premium-card">
 <div class="metric-title">最低計提資本要求</div>
-<div class="metric-value" style="color: #38a169;">${total_portfolio_capital:,.2f}</div>
+<div class="metric-value" style="color: #2A7B4C;">${total_portfolio_capital:,.2f}</div>
 </div>""", unsafe_allow_html=True)
         
     st.markdown("#### 📊 資產組合視覺化分析")
@@ -787,7 +788,7 @@ with tabs[1]:
         fig_rwa = px.pie(
             cat_rwa, values="RWA (元)", names="曝險類別", 
             title="各類別風險加權資產 (RWA) 佔比",
-            color_discrete_sequence=px.colors.qualitative.Pastel
+            color_discrete_sequence=['#9E1B32', '#B8974D', '#D4C49E', '#6B1124', '#D4AF37', '#8C7A5C', '#A83B52', '#EAD2AC', '#5C1D2A']
         )
         st.plotly_chart(fig_rwa, use_container_width=True)
         
@@ -796,11 +797,11 @@ with tabs[1]:
         fig_compare = go.Figure()
         fig_compare.add_trace(go.Bar(
             x=res_df["曝險名稱"], y=res_df["EAD (元)"],
-            name="曝險金額 (EAD)", marker_color='#93c5fd'
+            name="曝險金額 (EAD)", marker_color='#D4C49E'
         ))
         fig_compare.add_trace(go.Bar(
             x=res_df["曝險名稱"], y=res_df["RWA (元)"],
-            name="風險加權資產 (RWA)", marker_color='#1d4ed8'
+            name="風險加權資產 (RWA)", marker_color='#9E1B32'
         ))
         fig_compare.update_layout(
             barmode='group',
